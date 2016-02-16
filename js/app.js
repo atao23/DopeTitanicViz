@@ -1,35 +1,108 @@
 var pack = d3.layout.pack();
 
+var width = 800;
+var height = 800;
+var curX = 15;
+var curY = 25;
+
+obj = {"sex" : "male"}
+var d;
+
 d3.csv("../titanic3.csv", function(err, data) {
-    render(data)
+    d = data;
+    render(data, 0)
 });
 
-function render(data) {
+var svg;
+
+btn = document.getElementById("hello");
+btn.addEventListener("click", function() {
+    update();
+})
+
+function render(data, filter) {
     //console.log(data.length);
-    var svg = d3.select("body").append("svg")
-        .attr("width", 1000)
-        .attr("height", 500);
+    svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
         
     var circles = svg.selectAll("circle")
-        .data(data)
+        .data(function() {
+            if (filter) {
+                return data.filter(function (d) {
+                    return d.sex == "male";
+                });
+            } else {
+                return data;
+            }
+        })
         .enter()
         .append("circle");
         
     circles
         .attr("cx", function(d, i) {
-            return (i * 25) + 15;
+            return ((i * 20) + 10) % width;
         })
-       .attr("cy", 50/2)
+        .attr("cy", function(d, i) {
+            return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
+        })	
+       .attr("stroke", function(d) {
+           if (d.age < 18) {
+               return "red";
+           } else {
+               return "black";
+           }
+       })
+       .attr("stroke-width", 2)
        .attr("r", function(d) {
             return 5;
        })
        .attr("fill", function(d) {
            if (d.sex == "female") {
-               return "purple"
+               return "pink";
            } else {
-               return "blue"
+               return "blue";
            }
        });
+}
+
+function update() {
+    var circles = svg.selectAll("circle")
+        .data(d.filter(function(d) {
+            return d.sex == "male";
+        }))
+        .attr("cx", function(d, i) {
+            return ((i * 20) + 10) % width;
+        })
+        .attr("cy", function(d, i) {
+            return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
+        })	
+       .attr("stroke", function(d) {
+           if (d.age < 18) {
+               return "red";
+           } else {
+               return "black";
+           }
+       })
+       .attr("stroke-width", 2)
+       .attr("r", function(d) {
+            return 5;
+       })
+       .attr("fill", function(d) {
+           if (d.sex == "female") {
+               return "pink";
+           } else {
+               return "blue";
+           }
+       });
+    // ENTER
+    // Create new elements as needed.
+    // circles.enter().append("circle")
+        
+    // circles.text(function (d) { return d; });
+    // EXIT
+    // Remove old elements as needed.
+    circles.exit().remove();
 }
 
 /*
