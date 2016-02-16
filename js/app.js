@@ -51,7 +51,7 @@ function render(data, filter) {
                return "white";
            }
        })
-       .attr("stroke-width", 2)
+       .attr("stroke-width", 3)
        .attr("r", function(d) {
             return 5;
        })
