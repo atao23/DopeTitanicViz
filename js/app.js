@@ -48,9 +48,7 @@ function render(data, filter) {
         })	
        .attr("stroke", function(d) {
            if (d.age < 18) {
-               return "red";
-           } else {
-               return "black";
+               return "white";
            }
        })
        .attr("stroke-width", 2)
@@ -79,9 +77,7 @@ function update() {
         })	
        .attr("stroke", function(d) {
            if (d.age < 18) {
-               return "red";
-           } else {
-               return "black";
+               return "white";
            }
        })
        .attr("stroke-width", 2)
