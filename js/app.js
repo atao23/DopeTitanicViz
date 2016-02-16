@@ -1,7 +1,7 @@
 var pack = d3.layout.pack();
 
-var width = 800;
-var height = 800;
+var width = 900;
+var height = 900;
 var curX = 15;
 var curY = 25;
 
@@ -24,7 +24,8 @@ function render(data, filter) {
     //console.log(data.length);
     svg = d3.select("body").append("svg")
         .attr("width", width)
-        .attr("height", height);
+        .attr("height", height)
+        .style("border", "1px solid black"); //comment this out later
         
     var circles = svg.selectAll("circle")
         .data(function() {
@@ -44,7 +45,14 @@ function render(data, filter) {
             return ((i * 20) + 10) % width;
         })
         .attr("cy", function(d, i) {
-            return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
+            if (d.pclass == 1) {
+              return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
+            } else if (d.pclass == 2) {
+               return (50/2) * Math.floor(((i * 20) + 15) / width) + 60;
+            } else { //third class
+               return (50/2) * Math.floor(((i * 20) + 15) / width) + 105;
+            }
+            //return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
         })	
        .attr("stroke", function(d) {
            if (d.age < 18) {
