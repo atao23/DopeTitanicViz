@@ -12,19 +12,6 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 
     <script>
-    $(function() {
-        $( "#slider-range" ).slider({
-            range: true,
-            min: 0,
-            max: 80,
-            values: [ 0, 80 ],
-            slide: function( event, ui ) {
-                $( "#amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-            }
-        });
-        $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
-          " - " + $( "#slider-range" ).slider( "values", 1 ) );
-      });
       </script>
 
 </head>
@@ -42,8 +29,8 @@
 
 
         <h4>Gender</h4>
-        <label class="checkbox-inline"><input type="checkbox" value="Male">Male</label>
-        <label class="checkbox-inline"><input type="checkbox" value="Female">Female</label>
+        <label class="checkbox-inline"><input name="sex" type="checkbox" value="Male" checked="checked">Male</label>
+        <label class="checkbox-inline"><input name="sex" type="checkbox" value="Female" checked="checked">Female</label>
 
         </br>
         </br>
@@ -57,9 +44,9 @@
         </br>
 
         <h4>Passenger Class</h4>
-        <label class="checkbox-inline"><input type="checkbox" value="Class 1">1st</label>
-        <label class="checkbox-inline"><input type="checkbox" value="Class 2">2nd</label>
-        <label class="checkbox-inline"><input type="checkbox" value="Class 3">3rd</label>
+        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="Class 1" checked="checked">1st</label>
+        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="Class 2" checked="checked">2nd</label>
+        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="Class 3" checked="checked">3rd</label>
          
         </br>
 
