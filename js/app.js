@@ -51,6 +51,7 @@ var classGroups = [{data:[]},{data:[]},{data:[]}];
 d3.csv("../titanic3.csv", function(err, data) {
     for (var i = 0; i < data.length; i++) {
         var person = data[i];
+        //person.radius = 6
         var pclass = person.pclass;
         classGroups[pclass - 1]["data"].push(person);
     }

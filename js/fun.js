@@ -25,7 +25,7 @@ var margin = {
     bottom: 0,
     left: 0
 },
-width = 960 - margin.left - margin.right,
+width = 900- margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
 
 var n = 1309,
@@ -35,42 +35,71 @@ var n = 1309,
     color = d3.scale.category10().domain(d3.range(m)),
     x = d3.scale.ordinal().domain(d3.range(m)).rangePoints([0, width], 1);
 
-var nodes = d3.range(n).map(function () {
-    var i = Math.floor(Math.random() * m), //color
-        v = (i + 1) / m * -Math.log(Math.random()); //value
-    return {
-        radius: 6,
-        color: color(i),
-        cx: x(i),
-        cy: height / 2,
-    };
 
+var nodes = [];
+d3.csv("../titanic3.csv", function(err, data) {
+    for (var j = 0; j < data.length; j++) {
+        //create node
+        var i = data[j].pclass - 1;
+        var v = (i + 1) / m * -Math.log(Math.random()); //value
+
+        nodes.push({
+            sex: data[j].sex,
+            radius: 5,
+            cx: x(i),
+            cy: height / 2,
+        })
+    }
+    //console.log(nodes);
 });
+var circle;
+setTimeout(function() {
+    console.log(nodes);
 
-var force = d3.layout.force()
-    .nodes(nodes)
-    .size([width, height])
-    .gravity(0)
-    .charge(0)
-    .on("tick", tick)
-    .start();
+    var force = d3.layout.force()
+        .nodes(nodes)
+        .size([width, height])
+        .gravity(0)
+        .charge(0)
+        .on("tick", tick)
+        .start();
 
-var svg = d3.select("#chart").append("svg")
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .append("g")
-    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    var svg = d3.select("#chart").append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var circle = svg.selectAll("circle")
-    .data(nodes)
-    .enter().append("circle")
-    .attr("r", function (d) {
-    return d.radius;
-})
-    .style("fill", function (d) {
-    return d.color;
-})
-    .call(force.drag);
+    circle = svg.selectAll("circle")
+        .data(nodes)
+        .enter()
+        .append("circle")
+        .attr("r", function (d) {
+        return d.radius;
+    })
+        .attr("fill", function(d) {
+           if (d.sex == "female") {
+               return "#FF90AF";
+           } else {
+               return "#22ABCE";
+           }
+        })
+        .call(force.drag);
+
+}, 500);
+// var nodes = d3.range(n).map(function () {
+//     var i = Math.floor(Math.random() * m), //color
+//         v = (i + 1) / m * -Math.log(Math.random()); //value
+//     return { //add each person fields here
+//         //classGroup = 1
+//         //age = 1
+//         radius: 6,
+//         color: color(i),
+//         cx: x(i),
+//         cy: height / 2,
+//     };
+
+// });
 
 function tick(e) {
     circle.each(gravity(.4 * (e.alpha/3))) 
