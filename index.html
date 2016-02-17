@@ -4,21 +4,80 @@
     <meta charset="UTF-8">
     <title>DopeTitanicViz</title>
 
-    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    <script>
+    $(function() {
+        $( "#slider-range" ).slider({
+            range: true,
+            min: 0,
+            max: 80,
+            values: [ 0, 80 ],
+            slide: function( event, ui ) {
+                $( "#amount" ).val(ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+            }
+        });
+        $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+          " - " + $( "#slider-range" ).slider( "values", 1 ) );
+      });
+      </script>
+
 </head>
 <body>
 
     <h2>Passengers of the Titanic, 1912</h2>
-    <button id="hello">Update</button>
+    <hr>
 
-    </br>
+    <div id="dashboard">
+        <button id="hello">Update</button>
+        <button id="reset">Reset</button>
+        
+        </br>
+        </br>
 
-    <label class="checkbox-inline"><input type="checkbox" value="">Option 1</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Option 2</label>
-    <label class="checkbox-inline"><input type="checkbox" value="">Option 3</label>
 
-    <div id="chart"></div>
+        <h4>Gender</h4>
+        <label class="checkbox-inline"><input type="checkbox" value="Male">Male</label>
+        <label class="checkbox-inline"><input type="checkbox" value="Female">Female</label>
+
+        </br>
+        </br>
+
+        <p>
+            <h4 for="amount">Age range</h4>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+        </p>
+        <div id="slider-range"></div>
+
+        </br>
+
+        <h4>Passenger Class</h4>
+        <label class="checkbox-inline"><input type="checkbox" value="Class 1">1st</label>
+        <label class="checkbox-inline"><input type="checkbox" value="Class 2">2nd</label>
+        <label class="checkbox-inline"><input type="checkbox" value="Class 3">3rd</label>
+         
+        </br>
+
+        <hr>
+
+        <h4>Passengers</h4>
+        <p>1309 (this changes dynamically)</p>
+
+        </br>
+
+        <h4>Survivors</h4>
+        <p>1309 (this changes dynamically) (x%)</p>
+
+    </div>
+
+    <div id="viz">
+        <div id="chart"></div>
+    </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.js" type="text/javascript"></script>
     <script src="js/app.js" type="text/javascript"></script>
