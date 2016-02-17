@@ -1,0 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+body {
+    font-family: 'Open Sans', sans-serif;    
+    padding: 1em;
+    margin-left: 40px;
+    margin-right: 100px;
+}
+
+#dashboard {
+    width: 15vw; 
+    float: left;
+    margin-right: 50px;
+}
+
+#viz {
+    width: 60vw; 
+    float: left;
+}
