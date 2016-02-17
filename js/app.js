@@ -1,67 +1,54 @@
-var pack = d3.layout.pack();
+var width = 800;
+var height = 400;
 
-var width = 900;
-var height = 900;
-var curX = 15;
-var curY = 25;
-
-obj = {"sex" : "male"}
-var d;
+var classGroups = [{data:[]},{data:[]},{data:[]}];
 
 d3.csv("../titanic3.csv", function(err, data) {
-    d = data;
-    render(data, 0)
+    for (var i = 0; i < data.length; i++) {
+        var person = data[i];
+        var pclass = person.pclass;
+        classGroups[pclass - 1]["data"].push(person);
+    }
+    for (var i = 0; i < classGroups.length; i++) {
+        classGroups[i]["parent"] = render(classGroups[i].data, 0)
+    }
 });
 
-var svg;
-
-btn = document.getElementById("hello");
-btn.addEventListener("click", function() {
-    update();
-})
-
-function render(data, filter) {
-    //console.log(data.length);
-    svg = d3.select("body").append("svg")
-        .attr("width", width)
-        .attr("height", height)
-        .style("border", "1px solid black"); //comment this out later
+function render(data) {    
+    var adjustedWidth = width * (1 + Math.floor(data.length / width));
+    var adjustedHeight = Math.ceil((data.length / 40)) * 27.7777;
+    var xPos = 0;
+    var yPos;
+    svg = d3.select("#chart").append("svg")
+        .attr("width", adjustedWidth)
+        .attr("height", adjustedHeight);
         
     var circles = svg.selectAll("circle")
         .data(function() {
-            if (filter) {
-                return data.filter(function (d) {
-                    return d.sex == "male";
-                });
-            } else {
-                return data;
-            }
+                // Sort by age acending order
+                return data.sort(function(a, b) {return a.age - b.age});
         })
         .enter()
-        .append("circle");
-        
-    circles
+        .append("circle")
         .attr("cx", function(d, i) {
-            return ((i * 20) + 10) % width;
+            xPos = ((i * 20) + 10) % adjustedWidth;
+            if (xPos > adjustedWidth) {
+                xPos = 0;
+            }
+            return xPos;
         })
         .attr("cy", function(d, i) {
-            if (d.pclass == 1) {
-              return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
-            } else if (d.pclass == 2) {
-               return (50/2) * Math.floor(((i * 20) + 15) / width) + 60;
-            } else { //third class
-               return (50/2) * Math.floor(((i * 20) + 15) / width) + 105;
-            }
-            //return (50/2) * Math.floor(((i * 20) + 15) / width) + 15;
+            yPos = (50/2) * Math.floor(((i * 20) + 10) / adjustedWidth) + 15;
+            return yPos;
         })	
        .attr("stroke", function(d) {
            if (d.age < 18) {
                return "white";
            }
        })
-       .attr("stroke-width", 3)
+       .attr("stroke-width", 5)
        .attr("r", function(d) {
-            return 5;
+            return 6;
        })
        .attr("fill", function(d) {
            if (d.sex == "female") {
@@ -70,11 +57,14 @@ function render(data, filter) {
                return "blue";
            }
        });
+       return svg;
 }
 
 function update() {
-    var circles = svg.selectAll("circle")
-        .data(d.filter(function(d) {
+    for(var i = 0; i < classGroups.length; i++) {
+       var classList = classGroups[i].data;
+       var circles = classGroups[i].parent.selectAll("circle")
+        .data(classList.filter(function(d) {
             return d.sex == "male";
         }))
         .attr("cx", function(d, i) {
@@ -99,33 +89,6 @@ function update() {
                return "blue";
            }
        });
-    // ENTER
-    // Create new elements as needed.
-    // circles.enter().append("circle")
-        
-    // circles.text(function (d) { return d; });
-    // EXIT
-    // Remove old elements as needed.
-    circles.exit().remove();
+        circles.exit().remove(); 
+    }
 }
-
-/*
-    data = {className:"", children:data};
-    var chart = d3.select("#chart").append("svg:svg")
-        .attr("width", 100)
-        .attr("height", 100)
-        .attr("class", "bubble");
-
-    var node = chart.selectAll("g.node")
-        .data(pack.nodes(data))
-        .enter().append("svg:g")
-            .attr("class", "node")
-            .attr("transform", function(d, i) {
-                console.log(d);
-                return "translate(" + i * 100 + "," + i * 100 + ")";
-            });
-            
-    node.append("svg:circle")
-        .attr("r", function (d) { return 100; })
-        .style("fill", function (d) { return "purple"; });
-*/
