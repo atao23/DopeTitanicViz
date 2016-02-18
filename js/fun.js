@@ -180,13 +180,16 @@ function update() {
         for (var i = 0; i < nodes.length; i++) {
             nodes[i].cy = nodes[i].survived == 1 ? height / 4 : height / 4 * 3;
         }
+        // Div/Container that holdes survivorRate, Survivor Amount
         $("#survivorStats").show();
         var survived = nodes.filter(function (n) {
             return n.survived == 1;
         });
+        // Survivor Rate sets percent 
         $("#survivorRate").text(function() {
             return "" + Math.floor(survived.length/nodes.length * 100);
         });
+        // Survivor amount sets the absolute amount of survivors
         $("#survivorAmount").text(function() {
             return "" + survived.length;
         });
