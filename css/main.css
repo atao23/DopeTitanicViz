@@ -20,6 +20,49 @@ body {
 }
 
 #viz {
-    width: 60vw; 
+    width: 750px; 
     float: left;
+}
+
+#chart {
+    width: 750px; 
+}
+
+#water {
+    z-index: -1;
+    background:#CCDDEE;
+    height:0px;
+    width:900px;
+    position:absolute;
+    top: 355px;
+    margin:0px;
+    opacity: 0.8;
+}
+
+#column-left { 
+    float: left; 
+    width: 300px; 
+    margin-left: 110px;
+}
+
+#column-center{ 
+    display: inline-block; 
+    width: 205px; 
+}
+
+#column-right { 
+    float: right; 
+    width: 80px; 
+}
+
+#columns {
+    width: 800px
+}
+
+#nodeInfo {
+    font-size: 11px;
+}
+
+#passengerName, #passengerAge, #passengerSex {
+    margin:0;
 }
