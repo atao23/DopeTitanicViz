@@ -86,6 +86,12 @@ document.getElementById("resetBtn").addEventListener("click", function() {
     }
     update();
 })
+// DEAD BUTTON
+var crashed = false;
+document.getElementById("crash", function(e) {
+   crashed = true;
+   update(); 
+});
 
 // Height, Weight, Page info variables
 var margin = {
@@ -116,24 +122,26 @@ d3.csv("../titanic3.csv", function(err, data) {
         //create node
         var i = data[j].pclass - 1;
         var v = (i + 1) / m * -Math.log(Math.random()); //value
-
+        
         nodes.push({
             sex: data[j].sex,
             age: data[j].age,
             pclass: data[j].pclass,
+            survived: data[j].survived,
             name: data[j].name,
             radius: 5,
             cx: x(i),
-            cy: height / 2,
+            cy: height/2,
         });
         nodesCopy.push({
             sex: data[j].sex,
             age: data[j].age,
             pclass: data[j].pclass,
+            survived: data[j].survived,
             name: data[j].name,
             radius: 5,
             cx: x(i),
-            cy: height / 2,
+            cy: height/2,
         });
     }
     update();
@@ -146,7 +154,7 @@ var svg;
 // Basic function takes nodes and displays them on the chart. Should only called on initial load
 // or called when resetting the page
 // Function that handles any updates that the user makes
-function update(amount) {
+function update() {
     nodes = JSON.parse(JSON.stringify(nodesCopy));
     nodes = nodes.filter(function (n) {
         for (var prop in current) {
@@ -165,6 +173,12 @@ function update(amount) {
         }
         return true;
     });
+    for (var i = 0; i < nodes.length; i++) {
+        if (crashed) {
+            console.log(nodes[i]);
+            nodes[i].cy = nodes[i].survived == 1 ? height / 4 : height / 4 * 3;
+        }
+    }
     // Useful for stats?
     console.log(nodes.length, "nodes length");
     console.log(nodesCopy.length, "nodesCopy length");
