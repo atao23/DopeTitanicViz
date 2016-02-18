@@ -185,9 +185,9 @@ function update() {
         $("#survivorRate").text(function() {
             return "" + Math.floor(survived.length/nodes.length * 100);
         });
-        $("$survivorAmount").text(function() {
+        $("#survivorAmount").text(function() {
             return "" + survived.length;
-        })
+        });
     } else {
         $("#survivorStats").hide();
     }
