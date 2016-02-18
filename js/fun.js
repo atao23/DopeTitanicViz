@@ -173,11 +173,23 @@ function update() {
         }
         return true;
     });
-    for (var i = 0; i < nodes.length; i++) {
-        if (crashed) {
-            console.log(nodes[i]);
+    
+    if (crashed) {
+        for (var i = 0; i < nodes.length; i++) {
             nodes[i].cy = nodes[i].survived == 1 ? height / 4 : height / 4 * 3;
         }
+        $("#survivorStats").show();
+        var survived = nodes.filter(function (n) {
+            return n.survived == 1;
+        });
+        $("#survivorRate").text(function() {
+            return "" + Math.floor(survived.length/nodes.length * 100);
+        });
+        $("$survivorAmount").text(function() {
+            return "" + survived.length;
+        })
+    } else {
+        $("#survivorStats").hide();
     }
     // Useful for stats?
     console.log(nodes.length, "nodes length");
