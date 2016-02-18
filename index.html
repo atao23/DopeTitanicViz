@@ -21,8 +21,18 @@
     <hr>
 
     <div id="dashboard">
+        <div id="nodeInfo">
+            <h4>Passsenger Information:</h4>
+            <p id="hoverHelpMessage">Hover over a node to see information about that passenger!</p>
+            <div id="passengerInfo">
+                <span id="passengerName"></span>
+                <span id="passengerAge"></span>
+                <span id="passengerSex"></span>
+            </div>
+        </div>
+        
         <button id="hello">Update</button>
-        <button id="reset">Reset</button>
+        <button id="resetBtn">Reset</button>
         
         </br>
         </br>
@@ -44,16 +54,16 @@
         </br>
 
         <h4>Passenger Class</h4>
-        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="Class 1" checked="checked">1st</label>
-        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="Class 2" checked="checked">2nd</label>
-        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="Class 3" checked="checked">3rd</label>
+        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="1" checked="checked">1st</label>
+        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="2" checked="checked">2nd</label>
+        <label class="checkbox-inline"><input name="pclass" type="checkbox" value="3" checked="checked">3rd</label>
          
         </br>
 
         <hr>
 
         <h4>Passengers</h4>
-        <p>1309 (this changes dynamically)</p>
+        <p id="passengerCount"></p>
 
         </br>
 
