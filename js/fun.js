@@ -2,6 +2,7 @@
 * Annie Tao, Holden Stegman
 * Februrary 17th, Info 474 Assignment 4
 */
+
 // Object representing current baseline state (All boxes checked, etc)
 var baseline = {
     "sex": ["male", "female"],
@@ -35,10 +36,8 @@ for (var i = 0; i < checkboxes.length; i++) {
     })
 }
 
-
-/*
-TODO: CHANGE SIZE ON AGE
-*/
+var div = document.createElement("div");
+div.setAttribute("id", "water");
 
 // Function that listens and updates slider input
 
@@ -65,12 +64,14 @@ $(function () {
 var crashed = false;
 document.getElementById("crash").addEventListener("click", function(e) {
    crashed = true;
+   setTimeout(function() { $("#water").animate({height: "42%"}, 1500); }, 2500);
    update(); 
 });
 
 // Set up reset button
 document.getElementById("resetBtn").addEventListener("click", function() {
-    console.log("Resetting..");
+    $("#water").animate({height: "0px"}, 300);
+    //console.log("Resetting..");
     current = JSON.parse(JSON.stringify(baseline));
     $("#slider-range").slider({
         range: true,
@@ -187,7 +188,7 @@ function update() {
         });
         // Survivor Rate sets percent 
         $("#survivorRate").text(function() {
-            return "" + Math.floor(survived.length/nodes.length * 100);
+            return "(" + Math.floor(survived.length/nodes.length * 100) + "%)";
         });
         // Survivor amount sets the absolute amount of survivors
         $("#survivorAmount").text(function() {
@@ -202,7 +203,7 @@ function update() {
     // Update stats here
     $('#passengerCount').text(function() {
         var p = nodes.length == 1 ? "passenger" : "passengers";
-        return nodes.length + " " + p;
+        return nodes.length;
     });
     // End Update Stats
     $('#chart').empty();
@@ -214,12 +215,14 @@ function update() {
         .on("tick", tick)
         .start();
 
+    $('#chart').append(div);
+
     svg = d3.select("#chart").append("svg")
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
+    
     circle = svg.selectAll("circle")
         .data(nodes)
         .enter()
