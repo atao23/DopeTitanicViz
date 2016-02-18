@@ -61,6 +61,13 @@ $(function () {
         " - " + $("#slider-range").slider("values", 1));
 });
 
+// DEAD BUTTON
+var crashed = false;
+document.getElementById("crash").addEventListener("click", function(e) {
+   crashed = true;
+   update(); 
+});
+
 // Set up reset button
 document.getElementById("resetBtn").addEventListener("click", function() {
     console.log("Resetting..");
@@ -84,14 +91,9 @@ document.getElementById("resetBtn").addEventListener("click", function() {
             input.checked = true;
         }
     }
+    crashed = false;
     update();
 })
-// DEAD BUTTON
-var crashed = false;
-document.getElementById("crash").addEventListener("click", function(e) {
-   crashed = true;
-   update(); 
-});
 
 // Height, Weight, Page info variables
 var margin = {
