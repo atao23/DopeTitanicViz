@@ -88,7 +88,7 @@ document.getElementById("resetBtn").addEventListener("click", function() {
 })
 // DEAD BUTTON
 var crashed = false;
-document.getElementById("crash", function(e) {
+document.getElementById("crash").addEventListener("click", function(e) {
    crashed = true;
    update(); 
 });
