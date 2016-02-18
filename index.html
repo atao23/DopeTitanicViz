@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>DopeTitanicViz</title>
+    <link rel="icon" type="image/png" href="img/favicon.png">
 
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -10,9 +11,6 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-
-    <script>
-      </script>
 
 </head>
 <body>
@@ -25,11 +23,14 @@
             <h4>Passenger Information:</h4>
             <p id="hoverHelpMessage">Hover over a node to see information about that passenger!</p>
             <div id="passengerInfo">
-                <span id="passengerName"></span>
-                <span id="passengerAge"></span>
-                <span id="passengerSex"></span>
+                <p id="passengerName"></p>
+                <p id="passengerAge"></p>
+                <p id="passengerSex"></p>
             </div>
         </div>
+
+        </br>
+        </br>
 
         <button id="crash">Crash</button>
         <button id="resetBtn">Reset</button>
@@ -65,13 +66,23 @@
         <h4>Passengers</h4>
         <p id="passengerCount"></p>
 
-        <h4>Survivors</h4>
-        <p>1309 (this changes dynamically) (x%)</p>
+        <div id="survivorStats">
+            <h4>Survivors</h4>
+            <span id="survivorAmount"></span>
+            <span id="survivorRate"></span>
+        </div>
 
     </div>
 
+
     <div id="viz">
-        <div id="chart"></div>
+        <div id="columns">
+            <div id="column-left">1st Class</div>
+            <div id="column-center">2nd Class</div>
+            <div id="column-right">3rd Class</div>
+        </div>
+        <div id="chart"> <div id="water"> </div>
+        </div>
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.js" type="text/javascript"></script>
