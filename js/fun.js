@@ -39,6 +39,13 @@ for (var i = 0; i < checkboxes.length; i++) {
 var div = document.createElement("div");
 div.setAttribute("id", "water");
 
+var h2Drowned = document.createElement("h4");
+h2Drowned.setAttribute("id", "h2Drowned")
+h2Drowned.textContent = "Drowned";
+h2Drowned.className = "h2-margin-left"
+div.appendChild(h2Drowned);
+
+
 // Function that listens and updates slider input
 
 // Declare doubounce update
@@ -64,13 +71,21 @@ $(function () {
 var crashed = false;
 document.getElementById("crash").addEventListener("click", function(e) {
    crashed = true;
-   setTimeout(function() { $("#water").animate({height: "39%"}, 1500); }, 2500);
+   setTimeout(function() { 
+       $("#water").animate({height: "39%"}, 1500); 
+       $("#h2Drowned").css("display", "initial");
+    }, 2500);
+   //setTimeout(function() { $("#h2Drowned").animate({display: "initial"}, 1500); }, 2500);
    update(); 
 });
 
 // Set up reset button
 document.getElementById("resetBtn").addEventListener("click", function() {
     $("#water").animate({height: "0px"}, 200);
+    $("#h2Drowned").css("display", "none")
+    setTimeout(function() {
+         $("#h2Drowned").animate({display: "none"}, 1500); 
+    }, 2500);
     //console.log("Resetting..");
     current = JSON.parse(JSON.stringify(baseline));
     $("#slider-range").slider({
