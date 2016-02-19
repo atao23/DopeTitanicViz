@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 
 body {
     font-family: 'Open Sans', sans-serif;    
@@ -7,10 +7,24 @@ body {
     margin-right: 100px;
 }
 
+p {
+    font-weight: 600;
+}
+
 #nodeInfo {
     width: 100%;
     height: 10vh;
     margin-bottom: 2em;
+}
+
+#amount {
+    width: 80px;
+    display: inline;
+}
+
+#agerange {
+    width: 85px;
+    display: inline;
 }
 
 #dashboard {
@@ -34,35 +48,37 @@ body {
     height:0px;
     width:900px;
     position:absolute;
-    top: 355px;
+    top: 380px;
     margin:0px;
     opacity: 0.8;
 }
 
-#column-left { 
+.column-left { 
     float: left; 
     width: 300px; 
     margin-left: 110px;
 }
 
-#column-center{ 
+.column-center { 
     display: inline-block; 
-    width: 205px; 
+    width: 180px; 
 }
 
-#column-right { 
+.column-right { 
     float: right; 
     width: 80px; 
 }
 
-#columns {
-    width: 800px
+.columns {
+    width: 790px
 }
 
-#nodeInfo {
-    font-size: 11px;
+#passengerInfo, #hoverHelpMessage {
+    font-size: 12px;
 }
 
 #passengerName, #passengerAge, #passengerSex {
     margin:0;
 }
+
+

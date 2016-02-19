@@ -64,13 +64,13 @@ $(function () {
 var crashed = false;
 document.getElementById("crash").addEventListener("click", function(e) {
    crashed = true;
-   setTimeout(function() { $("#water").animate({height: "42%"}, 1500); }, 2500);
+   setTimeout(function() { $("#water").animate({height: "39%"}, 1500); }, 2500);
    update(); 
 });
 
 // Set up reset button
 document.getElementById("resetBtn").addEventListener("click", function() {
-    $("#water").animate({height: "0px"}, 300);
+    $("#water").animate({height: "0px"}, 200);
     //console.log("Resetting..");
     current = JSON.parse(JSON.stringify(baseline));
     $("#slider-range").slider({
@@ -211,6 +211,7 @@ function update() {
         .nodes(nodes)
         .size([width, height])
         .gravity(0)
+        .friction(0.75)
         .charge(0)
         .on("tick", tick)
         .start();
@@ -241,10 +242,10 @@ function update() {
         .on("mouseover", function (d) {
             $('#hoverHelpMessage').hide();
             $('#passengerInfo').show();
-            $('#passengerName').text(d.name);
-            $('#passengerAge').text(d.age);
+            $('#passengerName').text("Name: " + d.name);
+            $('#passengerAge').text("Age: " + d.age);
             $('#passengerSex').text(function() {
-                return d.sex.split('')[0].toUpperCase() + d.sex.split('').splice(1).join('');
+                return "Sex: " + d.sex.split('')[0].toUpperCase() + d.sex.split('').splice(1).join('');
             });
         })
         .on("mouseout", function (d) {
@@ -258,7 +259,7 @@ function update() {
 // Function for gravity chart that control gravity, ticks, collissions
 function tick(e) {
     circle.each(gravity(.4 * (e.alpha/3))) 
-        .each(collide(.35))
+        .each(collide(.3))
         .attr("cx", function (d) {
             return d.x;
         })

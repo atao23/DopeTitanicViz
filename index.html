@@ -19,27 +19,13 @@
     <hr>
 
     <div id="dashboard">
-        <div id="nodeInfo">
-            <h4>Passenger Information:</h4>
-            <p id="hoverHelpMessage">Hover over a node to see information about that passenger!</p>
-            <div id="passengerInfo">
-                <p id="passengerName"></p>
-                <p id="passengerAge"></p>
-                <p id="passengerSex"></p>
-            </div>
-        </div>
-
-        </br>
-        </br>
-
-        <button id="crash">Crash</button>
-        <button id="resetBtn">Reset</button>
+        <button type="button" class="btn btn-primary btn-sm" id="crash">Crash the Titanic!</button>
+        <button type="button" class="btn btn-default btn-sm" id="resetBtn">Reset</button>
         
         </br>
         </br>
 
-
-        <h4>Gender</h4>
+        <p>Gender</p>
         <label class="checkbox-inline"><input name="sex" type="checkbox" value="Male" checked="checked">Male</label>
         <label class="checkbox-inline"><input name="sex" type="checkbox" value="Female" checked="checked">Female</label>
 
@@ -47,14 +33,14 @@
         </br>
 
         <p>
-            <h4 for="amount">Age range</h4>
-            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+            <p for="amount" id="agerange">Age range: </p>
+            <input type="text" id="amount" readonly style="border:0; color:#FAAD4E; font-weight:bold;">
         </p>
         <div id="slider-range"></div>
 
         </br>
 
-        <h4>Passenger Class</h4>
+        <p>Passenger Class</p>
         <label class="checkbox-inline"><input name="pclass" type="checkbox" value="1" checked="checked">1st</label>
         <label class="checkbox-inline"><input name="pclass" type="checkbox" value="2" checked="checked">2nd</label>
         <label class="checkbox-inline"><input name="pclass" type="checkbox" value="3" checked="checked">3rd</label>
@@ -63,11 +49,25 @@
 
         <hr>
 
-        <h4>Passengers</h4>
-        <p id="passengerCount"></p>
+        <div id="nodeInfo">
+            <p>Passenger Information:</p>
+            <div id="hoverHelpMessage">Hover over each circle to see information about that passenger!</div>
+            <div id="passengerInfo">
+                <div id="passengerName"></div>
+                <div id="passengerAge"></div>
+                <div id="passengerSex"></div>
+            </div>
+        </div>
 
+        </br>
+
+        <p>Passengers</p>
+        <div id="passengerCount"></div>
+
+        </br>
+        
         <div id="survivorStats">
-            <h4>Survivors</h4>
+            <p id="big">Survivors</p>
             <span id="survivorAmount"></span>
             <span id="survivorRate"></span>
         </div>
@@ -76,13 +76,12 @@
 
 
     <div id="viz">
-        <div id="columns">
-            <div id="column-left">1st Class</div>
-            <div id="column-center">2nd Class</div>
-            <div id="column-right">3rd Class</div>
+        <div class="columns">
+            <h4 class="column-left">1st Class</h4>
+            <h4 class="column-center">2nd Class</h4>
+            <h4 class="column-right">3rd Class</h4>
         </div>
-        <div id="chart"> <div id="water"> </div>
-        </div>
+        <div id="chart"> <div id="water"> </div> </div>
     </div>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.15/d3.js" type="text/javascript"></script>
