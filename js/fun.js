@@ -120,7 +120,7 @@ var nodesCopy = [];
 var nodes = [];
 
 // Load CSV, load nodes and nodesCopy, call initial render
-d3.csv("../titanic3.csv", function(err, data) {
+d3.csv("./titanic3.csv", function(err, data) {
     for (var j = 0; j < data.length; j++) {
         //create node
         var i = data[j].pclass - 1;
